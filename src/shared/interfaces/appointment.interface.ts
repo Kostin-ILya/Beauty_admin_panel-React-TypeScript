@@ -8,5 +8,3 @@ export interface IAppointment {
 }
 
 export type TActiveAppointment = Omit<IAppointment, 'canceled'>
-
-// export { IAppointment, IActiveAppointment }

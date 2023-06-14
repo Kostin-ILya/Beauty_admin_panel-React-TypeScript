@@ -1,18 +1,23 @@
-import Header from "../header/Header";
-import SchedulePage from "../../pages/schedule/SchedulePage";
+import Header from '../header/Header'
+import SchedulePage from '../../pages/schedule/SchedulePage'
+
 // import HistoryPage from "../../pages/history/HistoryPage";
 // import CancelModal from "../modal/CancelModal";
-import "./app.scss";
+
+import { AppointmentContextProvider } from '../../context/appointments/AppointmentContext'
+import './app.scss'
 
 function App() {
-	return (
-		<main className="board">
-			<Header />
-			<SchedulePage />
-			{/* <HistoryPage /> */}
-			{/* <CancelModal /> */}
-		</main>
-	);
+  return (
+    <AppointmentContextProvider>
+      <main className="board">
+        <Header />
+        <SchedulePage />
+        {/* <HistoryPage /> */}
+        {/* <CancelModal /> */}
+      </main>
+    </AppointmentContextProvider>
+  )
 }
 
-export default App;
+export default App

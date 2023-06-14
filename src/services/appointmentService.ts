@@ -29,10 +29,9 @@ const useAppointmentService = () => {
     }
   }
 
-  const getAllActiveAppointments = async () => {
+  const getAllActiveAppointments = async (): Promise<TActiveAppointment[]> => {
     const data = await getAllAppointments()
     const res: TActiveAppointment[] = data.map(({ canceled, ...rest }) => {
-      console.log(rest)
       return rest
     })
 
