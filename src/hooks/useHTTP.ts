@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-type TLoadingStatus = 'idle' | 'loading' | 'error'
+export type TLoadingStatus = 'idle' | 'loading' | 'error'
 type THTTPRequestMethods = 'GET' | 'POST' | 'PATCH' | 'DELETE'
 interface IHTTPHeaders {
   [key: string]: string

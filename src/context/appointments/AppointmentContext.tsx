@@ -1,7 +1,9 @@
 import { useReducer, createContext } from 'react'
+
 import { reducer, IInitialState } from './reducer'
 import { ActionsType } from './actions'
 import { useAppointmentService } from '../../services/appointmentService'
+import { TLoadingStatus } from '../../hooks/useHTTP'
 
 const initialState: IInitialState = {
   allAppointments: [],
@@ -13,6 +15,7 @@ interface IProviderProps {
 }
 
 interface IAppointmentContextValue extends IInitialState {
+  appointmentLoadingStatus: TLoadingStatus
   getAppointments: () => void
   getActiveAppointments: () => void
 }
@@ -20,6 +23,7 @@ interface IAppointmentContextValue extends IInitialState {
 export const AppointmentContext = createContext<IAppointmentContextValue>({
   allAppointments: initialState.allAppointments,
   activeAppointments: initialState.activeAppointments,
+  appointmentLoadingStatus: 'idle',
   getActiveAppointments: () => {},
   getAppointments: () => {},
 })
@@ -27,12 +31,13 @@ export const AppointmentContext = createContext<IAppointmentContextValue>({
 export const AppointmentContextProvider = ({ children }: IProviderProps) => {
   const [state, dispatch] = useReducer(reducer, initialState)
 
-  const { getAllActiveAppointments, getAllAppointments } =
+  const { getAllActiveAppointments, getAllAppointments, loadingStatus } =
     useAppointmentService()
 
   const value = {
     allAppointments: state.allAppointments,
     activeAppointments: state.activeAppointments,
+    appointmentLoadingStatus: loadingStatus,
     getAppointments: () => {
       getAllAppointments().then((data) =>
         dispatch({ type: ActionsType.SET_ALL_APPOINTMENTS, payload: data })
