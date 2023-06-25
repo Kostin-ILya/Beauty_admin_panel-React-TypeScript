@@ -1,6 +1,6 @@
 import {
   IAppointment,
-  TActiveAppointment,
+  ActiveAppointment,
 } from './../../shared/interfaces/appointment.interface'
 
 export enum ActionsType {
@@ -15,5 +15,5 @@ export type TAppointmentAction =
     }
   | {
       type: ActionsType.SET_ACTIVE_APPOINTMENTS
-      payload: TActiveAppointment[]
+      payload: ActiveAppointment[]
     }

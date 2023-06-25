@@ -1,20 +1,21 @@
 import { useState } from 'react'
 
-export type TLoadingStatus = 'idle' | 'loading' | 'error'
-type THTTPRequestMethods = 'GET' | 'POST' | 'PATCH' | 'DELETE'
+export type LoadingStatus = 'idle' | 'loading' | 'error'
+type HTTPRequestMethods = 'GET' | 'POST' | 'PATCH' | 'DELETE'
+
 interface IHTTPHeaders {
   [key: string]: string
 }
 
 interface IRequestConfig {
   url: string
-  method?: THTTPRequestMethods
+  method?: HTTPRequestMethods
   body?: string | null
   headers?: IHTTPHeaders
 }
 
 const useHTTP = () => {
-  const [loadingStatus, setLoadingStatus] = useState<TLoadingStatus>('idle')
+  const [loadingStatus, setLoadingStatus] = useState<LoadingStatus>('idle')
 
   const request = async ({
     url,

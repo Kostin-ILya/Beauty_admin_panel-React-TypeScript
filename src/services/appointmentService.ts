@@ -5,7 +5,7 @@ import { hasRequiredFields } from '../utils/hasRequiredFileds'
 
 import {
   IAppointment,
-  TActiveAppointment,
+  ActiveAppointment,
 } from '../shared/interfaces/appointment.interface'
 
 const requiredFields = ['id', 'name', 'service', 'phone', 'canceled']
@@ -31,9 +31,9 @@ const useAppointmentService = () => {
     }
   }
 
-  const getAllActiveAppointments = async (): Promise<TActiveAppointment[]> => {
+  const getAllActiveAppointments = async (): Promise<ActiveAppointment[]> => {
     const data = await getAllAppointments()
-    const res: TActiveAppointment[] = data
+    const res: ActiveAppointment[] = data
       .filter(
         ({ canceled, date }) =>
           !canceled && dayjs(date).diff(undefined, 'seconds') > 0

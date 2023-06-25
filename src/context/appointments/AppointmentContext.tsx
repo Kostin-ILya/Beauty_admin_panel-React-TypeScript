@@ -3,7 +3,7 @@ import { useReducer, createContext } from 'react'
 import { reducer, IInitialState } from './reducer'
 import { ActionsType } from './actions'
 import { useAppointmentService } from '../../services/appointmentService'
-import { TLoadingStatus } from '../../hooks/useHTTP'
+import { LoadingStatus } from '../../hooks/useHTTP'
 
 const initialState: IInitialState = {
   allAppointments: [],
@@ -15,7 +15,7 @@ interface IProviderProps {
 }
 
 interface IAppointmentContextValue extends IInitialState {
-  appointmentLoadingStatus: TLoadingStatus
+  appointmentLoadingStatus: LoadingStatus
   getAppointments: () => void
   getActiveAppointments: () => void
 }

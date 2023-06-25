@@ -1,12 +1,12 @@
 import { ActionsType, TAppointmentAction } from './actions'
 import {
   IAppointment,
-  TActiveAppointment,
+  ActiveAppointment,
 } from './../../shared/interfaces/appointment.interface'
 
 export interface IInitialState {
   allAppointments: IAppointment[] | []
-  activeAppointments: TActiveAppointment[] | []
+  activeAppointments: ActiveAppointment[] | []
 }
 
 export const reducer = (state: IInitialState, action: TAppointmentAction) => {
