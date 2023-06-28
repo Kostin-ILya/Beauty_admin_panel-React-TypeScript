@@ -7,7 +7,10 @@ import { IAppointment } from '../../shared/interfaces/appointment.interface'
 
 import './appointmentItem.scss'
 
-type AppointmentProps = Optional<IAppointment, 'canceled'>
+type AppointmentProps = Optional<IAppointment, 'canceled'> & {
+  handleClickButton: (state: boolean) => void
+  handleSelectId: (id: number) => void
+}
 
 function AppointmentItem({
   id,
@@ -16,20 +19,22 @@ function AppointmentItem({
   service,
   phone,
   canceled,
+  handleClickButton,
+  handleSelectId,
 }: AppointmentProps) {
   const [timeLeft, setTimeLeft] = useState<string | null>(null)
 
   useEffect(() => {
     setTimeLeft(
-      `${dayjs(date).diff(new Date(), 'h')}:${
-        dayjs(date).diff(new Date(), 'h') % 60
+      `${dayjs(date).diff(undefined, 'h')}:${
+        dayjs(date).diff(undefined, 'm') % 60
       }`
     )
 
     const timerID = setInterval(() => {
       setTimeLeft(
-        `${dayjs(date).diff(new Date(), 'h')}:${
-          dayjs(date).diff(new Date(), 'h') % 60
+        `${dayjs(date).diff(undefined, 'h')}:${
+          dayjs(date).diff(undefined, 'm') % 60
         }`
       )
     }, 6000)
@@ -55,7 +60,15 @@ function AppointmentItem({
             <span>Time left:</span>
             <span className="appointment__timer">{timeLeft}</span>
           </div>
-          <button className="appointment__cancel">Cancel</button>
+          <button
+            className="appointment__cancel"
+            onClick={() => {
+              handleClickButton(true)
+              handleSelectId(id)
+            }}
+          >
+            Cancel
+          </button>
         </>
       ) : (
         <div className="appointment__canceled">Canceled</div>
