@@ -3,6 +3,7 @@ import { useState, useEffect, useContext } from 'react'
 import { AppointmentContext } from '../../context/appointments/AppointmentContext'
 
 import AppointmentItem from '../appointmentItem.tsx/AppointmentItem'
+
 import Spinner from '../spinner/Spinner'
 import Error from '../error/Error'
 import CancelModal from '../modal/CancelModal'
@@ -42,14 +43,14 @@ const AppointmentList = () => {
           <AppointmentItem
             key={item.id}
             {...item}
-            handleClickButton={setIsModalOpen}
+            handleOpen={setIsModalOpen}
             handleSelectId={setSelectedId}
           />
         ))
       ) : (
         <h2>No appointments</h2>
       )}
-      {isModalOpen && <CancelModal handleClickButton={setIsModalOpen} />}
+      {isModalOpen && <CancelModal handleClose={setIsModalOpen} />}
     </>
   )
 }

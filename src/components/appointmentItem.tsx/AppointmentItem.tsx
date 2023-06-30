@@ -8,7 +8,7 @@ import { IAppointment } from '../../shared/interfaces/appointment.interface'
 import './appointmentItem.scss'
 
 type AppointmentProps = Optional<IAppointment, 'canceled'> & {
-  handleClickButton: (state: boolean) => void
+  handleOpen: (state: boolean) => void
   handleSelectId: (id: number) => void
 }
 
@@ -19,7 +19,7 @@ function AppointmentItem({
   service,
   phone,
   canceled,
-  handleClickButton,
+  handleOpen,
   handleSelectId,
 }: AppointmentProps) {
   const [timeLeft, setTimeLeft] = useState<string | null>(null)
@@ -63,7 +63,7 @@ function AppointmentItem({
           <button
             className="appointment__cancel"
             onClick={() => {
-              handleClickButton(true)
+              handleOpen(true)
               handleSelectId(id)
             }}
           >
