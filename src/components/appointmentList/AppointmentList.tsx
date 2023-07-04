@@ -50,7 +50,11 @@ const AppointmentList = () => {
       ) : (
         <h2>No appointments</h2>
       )}
-      {isModalOpen && <CancelModal handleClose={setIsModalOpen} />}
+      <CancelModal
+        handleClose={setIsModalOpen}
+        isModalOpen={isModalOpen}
+        selectedId={selectedId}
+      />
     </>
   )
 }

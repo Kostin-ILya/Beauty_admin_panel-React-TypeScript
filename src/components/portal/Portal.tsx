@@ -8,9 +8,8 @@ interface IPortalProps {
 
 const createWrapperAndAppentToBody = (wrapperId: string) => {
   const wrapperElement = document.createElement('div')
-
   wrapperElement.id = wrapperId
-  wrapperElement.className = 'modal'
+  // wrapperElement.className = 'modal'
 
   document.body.appendChild(wrapperElement)
 
@@ -27,6 +26,7 @@ const Portal = ({ children, container = 'portal-wrapper' }: IPortalProps) => {
     if (!element) {
       element = createWrapperAndAppentToBody(container)
       created = true
+      console.log('portal')
     }
 
     setWrapperElement(element)
