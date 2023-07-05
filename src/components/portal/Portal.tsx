@@ -26,7 +26,6 @@ const Portal = ({ children, container = 'portal-wrapper' }: IPortalProps) => {
     if (!element) {
       element = createWrapperAndAppentToBody(container)
       created = true
-      console.log('portal')
     }
 
     setWrapperElement(element)

@@ -1,4 +1,4 @@
-import { useRef } from 'react'
+import { useRef, useEffect } from 'react'
 
 import { CSSTransition } from 'react-transition-group'
 
@@ -14,6 +14,21 @@ interface IModalProps {
 
 const CancelModal = ({ handleClose, isModalOpen, selectedId }: IModalProps) => {
   const modalRef = useRef<HTMLDivElement | null>(null)
+
+  const onClickEscapeClose = (e: KeyboardEvent): void => {
+    if (e.key === 'Escape') {
+      handleClose(false)
+    }
+  }
+
+  useEffect(() => {
+    document.body.addEventListener('keydown', onClickEscapeClose)
+
+    return () => {
+      document.body.removeEventListener('keydown', onClickEscapeClose)
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   return (
     <Portal>
