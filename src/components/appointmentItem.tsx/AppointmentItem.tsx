@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, memo } from 'react'
 
 import dayjs from 'dayjs'
 import { Optional } from 'utility-types'
@@ -8,8 +8,7 @@ import { IAppointment } from '../../shared/interfaces/appointment.interface'
 import './appointmentItem.scss'
 
 type AppointmentProps = Optional<IAppointment, 'canceled'> & {
-  handleOpen: (state: boolean) => void
-  handleSelectId: (id: number) => void
+  handleOpen: (appointmentId: number) => void
 }
 
 function AppointmentItem({
@@ -20,7 +19,6 @@ function AppointmentItem({
   phone,
   canceled,
   handleOpen,
-  handleSelectId,
 }: AppointmentProps) {
   const [timeLeft, setTimeLeft] = useState<string | null>(null)
 
@@ -63,8 +61,7 @@ function AppointmentItem({
           <button
             className="appointment__cancel"
             onClick={() => {
-              handleOpen(true)
-              handleSelectId(id)
+              handleOpen(id)
             }}
           >
             Cancel
@@ -77,4 +74,4 @@ function AppointmentItem({
   )
 }
 
-export default AppointmentItem
+export default memo(AppointmentItem)

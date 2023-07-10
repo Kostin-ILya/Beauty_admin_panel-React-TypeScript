@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext } from 'react'
+import { useState, useEffect, useCallback, useContext } from 'react'
 
 import { AppointmentContext } from '../../context/appointments/AppointmentContext'
 
@@ -23,6 +23,11 @@ const AppointmentList = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
+  const handleOpenModal = useCallback((appointmentId: number) => {
+    setIsModalOpen(true)
+    setSelectedId(appointmentId)
+  }, [])
+
   if (appointmentLoadingStatus === 'loading') {
     return <Spinner />
   } else if (appointmentLoadingStatus === 'error') {
@@ -43,8 +48,7 @@ const AppointmentList = () => {
           <AppointmentItem
             key={item.id}
             {...item}
-            handleOpen={setIsModalOpen}
-            handleSelectId={setSelectedId}
+            handleOpen={handleOpenModal}
           />
         ))
       ) : (
