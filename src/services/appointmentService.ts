@@ -13,11 +13,11 @@ const requiredFields = ['id', 'name', 'service', 'phone', 'canceled']
 const useAppointmentService = () => {
   const { loadingStatus, request } = useHTTP()
 
-  const _baseAPI = 'https://64da3756e947d30a260af8d7.mockapi.io'
+  const _baseAPI = 'https://64da3756e947d30a260af8d7.mockapi.io/appointments'
 
   const getAllAppointments = async (): Promise<IAppointment[]> => {
     const result: IAppointment[] = await request({
-      url: `${_baseAPI}/appointments`,
+      url: _baseAPI,
     })
 
     if (
@@ -45,7 +45,20 @@ const useAppointmentService = () => {
     return res
   }
 
-  return { loadingStatus, getAllAppointments, getAllActiveAppointments }
+  const cancelAppointment = (id: number): Promise<any> => {
+    return request({
+      url: `${_baseAPI}/${id}`,
+      method: 'PUT',
+      body: JSON.stringify({ canceled: true }),
+    })
+  }
+
+  return {
+    loadingStatus,
+    getAllAppointments,
+    getAllActiveAppointments,
+    cancelAppointment,
+  }
 }
 
 export { useAppointmentService }

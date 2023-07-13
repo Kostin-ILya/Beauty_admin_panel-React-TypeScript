@@ -1,7 +1,7 @@
 import { useState } from 'react'
 
 export type LoadingStatus = 'idle' | 'loading' | 'error'
-type HTTPRequestMethods = 'GET' | 'POST' | 'PATCH' | 'DELETE'
+type HTTPRequestMethods = 'GET' | 'POST' | 'PATCH' | 'PUT' | 'DELETE'
 
 interface IHTTPHeaders {
   [key: string]: string

@@ -1,9 +1,11 @@
-import { useState, useEffect, memo } from 'react'
+import { useState, useEffect, useContext, memo } from 'react'
 
 import dayjs from 'dayjs'
 import { Optional } from 'utility-types'
 
 import { IAppointment } from '../../shared/interfaces/appointment.interface'
+
+import { AppointmentContext } from '../../context/appointments/AppointmentContext'
 
 import './appointmentItem.scss'
 
@@ -22,24 +24,32 @@ function AppointmentItem({
 }: AppointmentProps) {
   const [timeLeft, setTimeLeft] = useState<string | null>(null)
 
+  const { getActiveAppointments } = useContext(AppointmentContext)
+
   useEffect(() => {
     setTimeLeft(
       `${dayjs(date).diff(undefined, 'h')}:${
-        dayjs(date).diff(undefined, 'm') % 60
+        (dayjs(date).diff(undefined, 'm') % 60) + 1
       }`
     )
 
-    const timerID = setInterval(() => {
-      setTimeLeft(
-        `${dayjs(date).diff(undefined, 'h')}:${
-          dayjs(date).diff(undefined, 'm') % 60
-        }`
-      )
-    }, 6000)
+    const timerId = setInterval(() => {
+      if (dayjs(date).diff(undefined, 's') <= 0) {
+        getActiveAppointments()
+        clearInterval(timerId)
+      } else {
+        setTimeLeft(
+          `${dayjs(date).diff(undefined, 'h')}:${
+            (dayjs(date).diff(undefined, 'm') % 60) + 1
+          }`
+        )
+      }
+    }, 60000)
 
     return () => {
-      clearInterval(timerID)
+      clearInterval(timerId)
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [date])
 
   const formattedDate = dayjs(date).format('DD/MM/YYYY HH:mm')
