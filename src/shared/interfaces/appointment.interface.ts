@@ -7,4 +7,6 @@ export interface IAppointment {
   canceled: boolean
 }
 
+export type CreatedAppointment = Omit<IAppointment, 'id' | 'canceled'>
+
 export type ActiveAppointment = Omit<IAppointment, 'canceled'>

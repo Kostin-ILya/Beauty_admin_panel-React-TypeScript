@@ -1,12 +1,16 @@
 import { useHTTP } from '../hooks/useHTTP'
 import dayjs from 'dayjs'
+import customParseFormat from 'dayjs/plugin/customParseFormat'
 
 import { hasRequiredFields } from '../utils/hasRequiredFileds'
 
 import {
   IAppointment,
   ActiveAppointment,
+  CreatedAppointment,
 } from '../shared/interfaces/appointment.interface'
+
+dayjs.extend(customParseFormat)
 
 const requiredFields = ['id', 'name', 'service', 'phone', 'canceled']
 
@@ -45,6 +49,20 @@ const useAppointmentService = () => {
     return res
   }
 
+  const addNewAppointment = (
+    newAppointment: CreatedAppointment
+  ): Promise<any> => {
+    const formattedDate = dayjs(newAppointment.date, 'DD/MM/YYYY HH:mm')
+    // С формы дата приходит в другом формате. Даем понять библиотеки, как правильно ее парсить
+    const data = { ...newAppointment, date: formattedDate, canceled: false }
+
+    return request({
+      url: _baseAPI,
+      method: 'POST',
+      body: JSON.stringify(data),
+    })
+  }
+
   const cancelAppointment = (id: number): Promise<any> => {
     return request({
       url: `${_baseAPI}/${id}`,
@@ -57,6 +75,7 @@ const useAppointmentService = () => {
     loadingStatus,
     getAllAppointments,
     getAllActiveAppointments,
+    addNewAppointment,
     cancelAppointment,
   }
 }
