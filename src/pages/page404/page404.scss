@@ -1,0 +1,12 @@
+.page404 {
+  margin-top: 50vh;
+  &__btn {
+    display: block;
+    margin: 20px auto;
+    padding: 10px 20px;
+  }
+  h1 {
+    text-align: center;
+    margin-top: 20px;
+  }
+}
