@@ -10,7 +10,8 @@ import { AppointmentContext } from '../../context/appointments/AppointmentContex
 import './appointmentItem.scss'
 
 type AppointmentProps = Optional<IAppointment, 'canceled'> & {
-  handleOpen: (appointmentId: number) => void
+  handleOpen?: (appointmentId: number) => void
+  isHistory?: boolean
 }
 
 function AppointmentItem({
@@ -21,6 +22,7 @@ function AppointmentItem({
   phone,
   canceled,
   handleOpen,
+  isHistory,
 }: AppointmentProps) {
   const [timeLeft, setTimeLeft] = useState<string | null>(null)
 
@@ -54,15 +56,11 @@ function AppointmentItem({
 
   const formattedDate = dayjs(date).format('DD/MM/YYYY HH:mm')
 
-  return (
-    <div className="appointment">
-      <div className="appointment__info">
-        <span className="appointment__date">Date: {formattedDate}</span>
-        <span className="appointment__name">Name: {name}</span>
-        <span className="appointment__service">Service: {service}</span>
-        <span className="appointment__phone">Phone: {phone}</span>
-      </div>
-      {!canceled ? (
+  const getAppointmentTimeData = () => {
+    if (isHistory && canceled) {
+      return <div className="appointment__canceled">Canceled</div>
+    } else if (!isHistory) {
+      return (
         <>
           <div className="appointment__time">
             <span>Time left:</span>
@@ -71,15 +69,27 @@ function AppointmentItem({
           <button
             className="appointment__cancel"
             onClick={() => {
-              handleOpen(id)
+              if (handleOpen) {
+                handleOpen(id)
+              }
             }}
           >
             Cancel
           </button>
         </>
-      ) : (
-        <div className="appointment__canceled">Canceled</div>
-      )}
+      )
+    }
+  }
+
+  return (
+    <div className="appointment">
+      <div className="appointment__info">
+        <span className="appointment__date">Date: {formattedDate}</span>
+        <span className="appointment__name">Name: {name}</span>
+        <span className="appointment__service">Service: {service}</span>
+        <span className="appointment__phone">Phone: {phone}</span>
+      </div>
+      {getAppointmentTimeData()}
     </div>
   )
 }

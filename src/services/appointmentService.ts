@@ -29,7 +29,13 @@ const useAppointmentService = () => {
         hasRequiredFields(item, requiredFields)
       )
     ) {
-      return result
+      return result.sort((a, b) => {
+        if (dayjs(b.date).isBefore(dayjs(a.date))) {
+          return 1
+        } else {
+          return -1
+        }
+      })
     } else {
       throw new Error(`Data doesn't has all fields`)
     }
