@@ -7,13 +7,17 @@ import Spinner from '../spinner/Spinner'
 import Error from '../error/Error'
 
 function HistoryList() {
-  const { getAppointments, appointmentLoadingStatus, allAppointments } =
-    useContext(AppointmentContext)
+  const {
+    getAppointments,
+    appointmentLoadingStatus,
+    allAppointments,
+    calendarDate,
+  } = useContext(AppointmentContext)
 
   useEffect(() => {
     getAppointments()
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, [calendarDate])
 
   if (appointmentLoadingStatus === 'loading') {
     return <Spinner />
@@ -34,7 +38,7 @@ function HistoryList() {
           <AppointmentItem key={item.id} isHistory {...item} />
         ))
       ) : (
-        <h2>No appointments</h2>
+        <h2>No appointments </h2>
       )}
     </>
   )

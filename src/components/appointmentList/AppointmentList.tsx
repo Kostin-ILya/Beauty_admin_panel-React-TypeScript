@@ -16,12 +16,13 @@ const AppointmentList = () => {
     getActiveAppointments,
     activeAppointments,
     appointmentLoadingStatus,
+    calendarDate,
   } = useContext(AppointmentContext)
 
   useEffect(() => {
     getActiveAppointments()
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, [calendarDate])
 
   const handleOpenModal = useCallback((appointmentId: number) => {
     setIsModalOpen(true)
