@@ -67,3 +67,13 @@
     color: rgba(0, 0, 0, 0.7);
   }
 }
+
+@media (max-width: 991px) {
+  .appointment {
+    column-gap: 0px;
+    grid-template-columns: 210px auto;
+    &__cancel {
+      right: 28px;
+    }
+  }
+}

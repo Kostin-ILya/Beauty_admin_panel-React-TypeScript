@@ -11,3 +11,24 @@
   box-shadow: 15px 15px 30px rgba(0, 0, 0, 0.25);
   border-radius: 10px;
 }
+
+@media (max-width: 1399px) {
+  .board {
+    max-width: 1140px;
+  }
+}
+
+@media (max-width: 1199px) {
+  .board {
+    max-width: 960px;
+    padding: 10px 50px 50px 50px;
+    margin: 30px auto;
+  }
+}
+@media (max-width: 991px) {
+  .board {
+    max-width: 720px;
+    padding: 15px;
+    margin: 20px auto;
+  }
+}
