@@ -41,3 +41,13 @@
     padding-top: 30px;
   }
 }
+@media (max-width: 767px) {
+  .schedule {
+    // max-width: 100%;
+    grid-template-columns: 1fr;
+    column-gap: 0px;
+    padding-top: 30px;
+    justify-items: center;
+    row-gap: 30px;
+  }
+}

@@ -21,6 +21,7 @@
 @media (max-width: 1199px) {
   .board {
     max-width: 960px;
+    width: auto;
     padding: 10px 50px 50px 50px;
     margin: 30px auto;
   }
@@ -30,5 +31,19 @@
     max-width: 720px;
     padding: 15px;
     margin: 20px auto;
+  }
+}
+@media (max-width: 767px) {
+  .board {
+    max-width: 540px;
+    padding: 15px;
+    margin: 10px auto;
+  }
+}
+@media (max-width: 575px) {
+  .board {
+    max-width: 100%;
+    padding: 0px;
+    margin: 10px;
   }
 }

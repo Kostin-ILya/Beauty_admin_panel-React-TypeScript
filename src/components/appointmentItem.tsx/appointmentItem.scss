@@ -77,3 +77,27 @@
     }
   }
 }
+@media (max-width: 767px) {
+  .appointment {
+    grid-template-columns: 240px auto;
+    column-gap: 110px;
+    &__cancel {
+      right: 28px;
+    }
+  }
+}
+@media (max-width: 575px) {
+  .appointment {
+    grid-template-columns: 180px auto;
+    column-gap: 0px;
+    &__cancel {
+      right: 20px;
+    }
+    &__timer {
+      font-size: 20px;
+    }
+    span:not(.appointment__timer) {
+      font-size: 13px;
+    }
+  }
+}
