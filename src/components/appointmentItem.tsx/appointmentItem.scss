@@ -84,20 +84,24 @@
     &__cancel {
       right: 28px;
     }
+    span:not(.appointment__timer) {
+      font-size: 13px;
+    }
   }
 }
 @media (max-width: 575px) {
   .appointment {
     grid-template-columns: 180px auto;
     column-gap: 0px;
+    min-width: 270px;
     &__cancel {
       right: 20px;
     }
     &__timer {
       font-size: 20px;
     }
-    span:not(.appointment__timer) {
-      font-size: 13px;
-    }
+    // span:not(.appointment__timer) {
+    //   font-size: 13px;
+    // }
   }
 }

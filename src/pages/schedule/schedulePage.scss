@@ -49,5 +49,8 @@
     padding-top: 30px;
     justify-items: center;
     row-gap: 30px;
+    &__controls {
+      justify-items: center;
+    }
   }
 }
